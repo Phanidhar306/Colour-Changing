@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Game</title>
+    <style>
+      body {
+        background-color: white;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 300px;
+        height: 400px;
+        margin: 20px auto;
+        font-family: Arial, sans-serif;
+      }
+      .set {
+        text-align: center;
+      }
+      button {
+        margin: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="set">
+      <h1>Color Game</h1>
+      <button onclick="start()">Start</button>
+      <button onclick="stop()">Stop</button>
+      <button onclick="pause()">Pause</button>
+    </div>
+    <script>
+      const colors = ["crimson", "plum", "orange", "purple"];
+      let index = 0;
+      let intervalId = null;
+      let isPaused = false;
+
+      function start() {
+        if (!intervalId) {
+          intervalId = setInterval(changeColor, 2000);
+        }
+      }
+
+      function stop() {
+        clearInterval(intervalId);
+        intervalId = null;
+        index = 0;
+        document.body.style.backgroundColor = "white";
+      }
+
+      function pause() {
+        if (intervalId) {
+          if (isPaused) {
+            intervalId = setInterval(changeColor, 2000);
+            isPaused = false;
+          } else {
+            clearInterval(intervalId);
+            isPaused = true;
+          }
+        }
+      }
+
+      function changeColor() {
+        document.body.style.backgroundColor = colors[index];
+        index = (index + 1) % colors.length;
+      }
+    </script>
+  </body>
+</html>
